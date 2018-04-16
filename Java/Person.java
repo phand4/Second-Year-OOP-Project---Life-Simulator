@@ -3,11 +3,12 @@ public class Person implements GameObject{
 	private boolean isAlive;
 	private String sname;
 	private String fname;
-	private String job;
+	private Job job;
+	private float money;
 	private int alignment;
 	private int fame;
 
-	public Person(String fn, String sn, int a, String j, int i, int f) {
+	public Person(String fn, String sn, int a, Job j, int i, int f) {
 		this.fname = fn;
 		this.sname = sn;
 		this.age = a;
@@ -15,7 +16,7 @@ public class Person implements GameObject{
 		this.job = j;
 		this.alignment = i;
 		this.fame = f;
-			
+		this.money = (this.job).getSalary();
 	}
 	
 	public Person()
@@ -27,24 +28,36 @@ public class Person implements GameObject{
 		this.job = null;
 		this.alignment = 0;
 		this.fame = 0;
+		this.money = 0;
+	}
+	
+	public float checkFunds()
+	{
+		return money;
 	}
 	
 	public String fameCalculator()
 	{
 		String fameString = "";
 		if(getFame() < 20 && getFame() > 0)
-			fameString += "They are not famous."
+		{
+			fameString += "They " + (getStatus() ? "are" : "were") + " not famous.";
+		}
 		if(getFame() > 20 && getFame() < 50)
 		{
-			fameString += "They are sorta famous.";
+			fameString += "They " + (getStatus() ? "are" : "were") + " sorta famous.";
 		}
 		else if(getFame() > 50 && getFame() < 100)
 		{
-			fameString += "They are quite famous.";
+			fameString += "They " + (getStatus() ? "are" : "were") + " quite famous.";
 		}
 		else if(getFame() >= 100)
 		{
-			fameString += "They are pretty goddamn famous.";
+			fameString += "They " + (getStatus() ? "are" : "were") + " pretty goddamn famous.";
+		}
+		else if(getFame() < 0)
+		{
+			fameString += "They " + (getStatus() ? "are" : "were") + " infamous.";
 		}
 		return fameString;
 	}
@@ -52,7 +65,8 @@ public class Person implements GameObject{
 	public String toString()
 	{
 		String toBeReturned = "";
-		if(getStatus()){
+		if(getStatus())
+		{
 			toBeReturned = "This person's name is " + getfName() + " " + getsName() + ". They are " + getAge() + " years old.";
 			if(getJob() != null)
 			{
@@ -74,20 +88,32 @@ public class Person implements GameObject{
 			{
 				toBeReturned += "They are a good person.";
 			}
-			if(getFame() > 20 && getFame() < 50)
-			{
-				toBeReturned += "They are sorta famous.";
-			}
-			else if(getFame() > 50 && getFame() < 100)
-			{
-				toBeReturned += "They are quite famous.";
-			}
-			else if(getFame() >= 100)
-			{
-				toBeReturned += "They are pretty goddamn famous.";
-			}
-			else if()
 		}
+		else
+		{
+			toBeReturned = "This person's name was " + getfName() + " " + getsName() + ". They were " + getAge() + " years old.";
+			if(getJob() != null)
+			{
+				toBeReturned += " They worked as a(an) " + getJob() + "."; 
+			}
+			else if(getJob() == null)
+			{
+				toBeReturned += " They were unemployed."; 
+			}
+			if(getAlignment() < 0)
+			{
+				toBeReturned += " They were a bad person.";
+			}
+			else if (getAlignment() == 0)
+			{
+				toBeReturned += " They were neutral.";
+			}
+			else if(getAlignment() > 0)
+			{
+				toBeReturned += "They were a good person.";
+			}
+		}
+		toBeReturned+= fameCalculator();
 		return toBeReturned;
 	}
 
@@ -108,7 +134,7 @@ public class Person implements GameObject{
 	}
 
 	public String getJob(){
-		return job;
+		return job.toString();
 	}
 
 	public int getAlignment(){
