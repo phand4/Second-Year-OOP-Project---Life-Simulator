@@ -1,10 +1,12 @@
+import java.math.BigDecimal;
+
 public class Job implements GameObject{
 	
 	private String jobTitle;
 	private String company;
-	private float salary;
+	private BigDecimal salary;
 	
-	public Job(String job, String company, float salary)
+	public Job(String job, String company, BigDecimal salary)
 	{
 		this.jobTitle = job;
 		this.company = company;
@@ -21,7 +23,7 @@ public class Job implements GameObject{
 		return this.company;
 	}
 	
-	public float getSalary()
+	public BigDecimal getSalary()
 	{
 		return this.salary;
 	}
