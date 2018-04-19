@@ -5,6 +5,11 @@
  */
 package oop;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,10 +49,21 @@ public class InsertData {
     }
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         // TODO code application logic here
-        InsertData app = new InsertData();
-        app.insert("BOI");
+        File file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\firstnames.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        String line = null;
+        int i = 0;
+        while( (line = br.readLine())!= null){
+            while(i < 100){
+                String [] token = line.split("\\s+");
+                String charname = token[i];
+                InsertData app = new InsertData();
+                app.insert(charname);
+                i++;
+            }
+        }
     }  
 
 }
