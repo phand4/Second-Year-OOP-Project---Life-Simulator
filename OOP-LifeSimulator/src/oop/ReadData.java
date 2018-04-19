@@ -7,7 +7,9 @@ package oop;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -29,7 +31,7 @@ public void selectAll(){
     String sql = "SELECT name FROM firstNames";
      try(Connection conn = this.connect();
          Statement stmt = conn.createStatement();
-         ResultSet rs   = stmt.executeQuery(sql)){
+         ResultSet rs = stmt.executeQuery(sql)){
          while(rs.next()) {
              System.out.println(rs.getString("name"));
          }
@@ -39,6 +41,8 @@ public void selectAll(){
 }
  
 public static void main(String[] args){
-    ReadData app = new Readapp;
+    ReadData app = new ReadData();
+    app.selectAll();
+    
 }
 }

@@ -47,7 +47,7 @@ public class InsertData {
     public static void main(String[] args) {
         // TODO code application logic here
         InsertData app = new InsertData();
-        app.insert("Test");
+        app.insert("BOI");
     }  
 
 }
