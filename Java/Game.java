@@ -1,4 +1,3 @@
-package com.game.src.main;
 
 import java.awt.Canvas;
 import java.awt.Color;
