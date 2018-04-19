@@ -38,9 +38,9 @@ public class Oop {
         
     }
     
-    public static void createNewTable(String fileName){
+    public static void createNewTable(String fileName, String tableName){
         String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
-        String sql = "CREATE TABLE IF NOT EXISTS firstNames (\n"
+        String sql = "CREATE TABLE IF NOT EXISTS '" + tableName + "' (\n"
                    + "id integer PRIMARY KEY, \n"
                    + "name text NOT NULL\n"
                    + ");";
@@ -54,12 +54,13 @@ public class Oop {
        
     }
     
-
-
     public static void main(String[] args) {
         // TODO code application logic here
         createNewDatabase("people.db");
-        createNewTable("people.db");
+        createNewTable("people.db", "firstNames");
+        createNewTable("people.db", "surnames");
+        createNewTable("people.db", "occupations");
+        createNewTable("people.db", "locations");
         
 
     }
