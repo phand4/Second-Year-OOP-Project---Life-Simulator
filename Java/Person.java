@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ public class Person implements GameObject{
 	private BigDecimal money;
 	private int alignment;
 	private int fame;
+	private Color colour; 
 
 	public Person(String fn, String sn, int a, Job j, int i, int f, char g) {
 		this.fname = fn;
@@ -22,6 +24,7 @@ public class Person implements GameObject{
 		this.fame = f;
 		this.gender = g;
 		this.money = (this.job).getSalary();
+		
 	}
 	
 	public Person(String fn, char g, Job j)
@@ -35,6 +38,7 @@ public class Person implements GameObject{
 		this.money = null;
 		this.fame = 0; 
 		this.alignment = 0;
+		this.colour = randomColor();
 	}
 	
 	public Person()
@@ -48,6 +52,7 @@ public class Person implements GameObject{
 		this.alignment = 0;
 		this.fame = 0;
 		this.money = null;
+		this.colour = randomColor();
 	}
 	
 	private char randomGender()
@@ -60,6 +65,15 @@ public class Person implements GameObject{
 			c = 'M';
 		}
 		return c;
+	}
+	
+	private Color randomColor()
+	{
+		Random l = new Random();
+		float r = (float) (l.nextFloat() / 2f + 0.5);
+		float g = (float) (l.nextFloat() / 2f + 0.5) ;
+		float b = (float) (l.nextFloat() / 2f + 0.5);
+		return new Color(r, g, b);
 	}
 	
 	private String randomSurname()
