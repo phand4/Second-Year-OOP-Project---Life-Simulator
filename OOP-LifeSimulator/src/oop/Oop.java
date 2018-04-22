@@ -38,11 +38,16 @@ public class Oop {
         
     }
     
-    public static void createNewTable(String fileName, String tableName){
+    public static void createNewTable(String fileName, String tableName, String colName){
         String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
         String sql = "CREATE TABLE IF NOT EXISTS '" + tableName + "' (\n"
                    + "id integer PRIMARY KEY, \n"
-                   + "name text NOT NULL\n"
+                   + "'"+ colName + "'text NOT NULL"
+                   + (("occupations".equals(tableName))?", \n company text NOT NULL, \n salary BigDecimal NOT NULL\n" : 
+                     (("locations".equals(tableName))?", \n location text NOT NULL, \n company text NOT NULL\n" : 
+                     (("event".equals(tableName))?", \n eventKey integer NOT NULL\n" :
+                     (("eventdesc".equals(tableName))?", \n eventData text NOT NULL, \n eventEffect text NOT NULL, \n eventKey integer NOT NULL\n" : 
+                     (("people".equals(tableName))?", \n sName text NOT NULL, \n age integer NOT NULL, \n isAlive boolean NOT NULL, \n job text NOT NULL, \n alignment integer NOT NULL, \n fame integer NOT NULL, \n money BigDecimal NOT NULL\n" : "")))))                                      
                    + ");";
         
         try (Connection conn = DriverManager.getConnection(url);
@@ -57,12 +62,12 @@ public class Oop {
     public static void main(String[] args) {
         // TODO code application logic here
         createNewDatabase("people.db");
-        createNewTable("people.db", "firstNames");
-        createNewTable("people.db", "surnames");
-        createNewTable("people.db", "occupations");
-        createNewTable("people.db", "locations");
-        
-
-    }
-    
+        createNewTable("people.db", "firstNames", "name");
+        createNewTable("people.db", "surnames", "name");
+        createNewTable("people.db", "occupations", "jobTitle");
+        createNewTable("people.db", "locations", "building");
+        createNewTable("people.db", "event", "title");
+        createNewTable("people.db", "evendesc", "eventTitle");
+        createNewTable("people.db", "people", "fName");
+    }  
 }
