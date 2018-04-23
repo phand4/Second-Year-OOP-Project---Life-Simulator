@@ -17,7 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import static oop.Oop.createNewDatabase;
 import static oop.Oop.createNewTable;
-import static oop.InsertData.fileManage;
+
 
 /**
  *
@@ -37,200 +37,134 @@ public class InsertData {
         }
         return conn;
     }
-    
-    public static void fileManage(BufferedReader br, BufferedReader br2, BufferedReader br3, 
-                                  Integer fileSize,  String tableName, int x, String columnName,
-                                  String columnName2, String columnName3) throws IOException{
-
-        String line = null;
+    public static void fileManage1f(BufferedReader br, Integer fileSize, String tableName,
+                                    String columnName) throws IOException{
         int i = 0;
-        
-        switch(x){
-            case 1: //job
-                if(columnName3.equals("salary")){                   
-                    while(i < fileSize){
-                        //BigDecimal value = (Math.random()*100);
-                        int value = 100;
-                        String charname = null;
-                        InsertData app = new InsertData();
-                        app.insert(charname, tableName, columnName3, value);
-                        i++;
-                    }         
-                    i = 0;
-                }
-                while( (line = br3.readLine())!= null){                               
-                    while(i < fileSize){
-                        Integer value = null;
-                        String [] token = line.split("\\s+");
-                        String charname = token[i];
-                        InsertData app = new InsertData();
-                        app.insert(charname, tableName, columnName3, value);
-                        i++;
-                    }
-                    i = 0;
-               }                
-            
-            case 2: //location
-                while( (line = br3.readLine())!= null){   
-                    while(i < fileSize){
-                        Integer value = null;
-                        String [] token = line.split("\\s+");
-                        String charname = token[i];
-                        InsertData app = new InsertData();
-                        app.insert(charname, tableName, columnName2, value);
-                        i++;
-                    }
-                    i = 0;
-                }
-                
-                
-            default: //first and second
-                while( (line = br.readLine())!= null){
-                    while(i < fileSize){
-                        Integer value = null;
-                        String [] token = line.split("\\s+");
-                        String charname = token[i];
-                        InsertData app = new InsertData();
-                        app.insert(charname, tableName, columnName, value);
-                        i++;
-                    }                        
-                }
-                break;
+        String line = null;
+        while((line = br.readLine()) != null){
+            while(i < fileSize){
+                Integer value = null;
+                String [] token = line.split("\\s+");
+                String charname = token[i];
+                InsertData app = new InsertData();
+                app.insert(charname, tableName, columnName);
+                i++;
+            }
         }
-                       
-
     }
     
-    public void insert(String data, String tableName, String columnName, Integer value){
-        String sql = "INSERT INTO'" + tableName +"'('"+columnName+"') VALUES(?)";
-        if(value == null){
+    public void insert(String data, String tableName, String columnName){
+        String sql = "INSERT INTO '" + tableName + "'('" + columnName + "') VALUES(?)";
             try(Connection conn = this.connect();
                     PreparedStatement pstmt = conn.prepareStatement(sql)){
                 pstmt.setString(1, data);
                 pstmt.executeUpdate();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
-            }   
-        } else {
+            }
+    }
+    
+    public static void fileManage3fs(BufferedReader br, BufferedReader br2, BufferedReader br3,
+                                  Integer fileSize, String tableName,String columnName,
+                                  String columnName2, String columnName3
+                                  ) throws IOException{
+        int i =0;
+        String line = null;
+        String line2 = null;
+        String line3 = null;
+        while( (line = br.readLine())!= null && (line2 = br2.readLine()) !=  null && (line3 = br3.readLine()) != null){                               
+            while(i < fileSize){
+                    Integer value = null;
+                    String [] token = line.split("\\s+");
+                    String charname = token[i];
+                    String [] token2 = line2.split("\\s+");
+                    String charname2 = token2[i];
+                    String [] token3 = line3.split("\\s+");
+                    String charname3 = token3[i];
+                    InsertData app = new InsertData();
+                    app.insert3fs(charname, charname2, charname3, tableName, columnName, columnName2, columnName3);                   
+                    i++;
+                }
+                i = 0;
+            }  
+                              
+    }
+   
+    public void insert3fs(String data, String data2, String data3, String tableName, String columnName, String columnName2, String columnName3){
+        
+        String sql = "INSERT INTO'" + tableName +"'('"+ columnName + "','" + columnName2 + "','" + columnName3 +"') VALUES(?, ?, ?)";
+        
             try(Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)){
-                pstmt.setInt(1, value);
+                PreparedStatement pstmt = conn.prepareStatement(sql)){             
+                pstmt.setString(1, data);
+                pstmt.setString(2, data2);
+                pstmt.setString(3, data3);
                 pstmt.executeUpdate();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
-            }  
-        }
+            }   
+
     }
     
     
     public static void main(String[] args) throws IOException{
         // TODO code application logic here
+        String columnName2 = null;
+        String columnName3 = null;
+        BufferedReader br2 = null;
+        BufferedReader br3 = null;
         
         //Filling the firstname table
         File file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\firstnames.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         String tableName = "firstNames";
         String columnName = "name";
-        String columnName2 = null;
-        String columnName3 = null;
         Integer fileSize = 100;
-        int x = 0;
-        BufferedReader br2 = null;
-        BufferedReader br3 = null;
-        fileManage(br, br2, br3, fileSize, tableName, x, columnName, columnName2, columnName3);   
+        fileManage1f(br,fileSize, tableName, columnName);   
         
         //Filling the surname table
         file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\surnames.txt");
         br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         tableName = "surnames";
         fileSize = 100;
-        fileManage(br, br2, br3, fileSize, tableName, x, columnName, columnName2, columnName3);   
+        fileManage1f(br, fileSize, tableName, columnName);   
         
         //filling the job table
         file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\jobs.txt");
         br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         File file2 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\jobCompanies.txt");
-        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));
         tableName = "occupations";
-        x = 3;
+        File file3 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\salaries.txt");
+        br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3)));
+       
         columnName = "jobTitle";
         columnName2 = "company";
         columnName3 = "salary";
         fileSize = 10;
-        fileManage(br, br2, br3, fileSize, tableName, x, columnName, columnName2, columnName3);   
-    
+        fileManage3fs(br, br2, br3, fileSize, tableName, columnName, columnName2, columnName3);   
+
+       
+        
+       /* first names, events and surnames 2 fields
+        occupations and locations are 3 fields */
+
+        
         //filling location table
         file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\places.txt");
         br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        file2 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\address.txt");
-        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        File file3 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\jobCompanies.txt");
-        br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        tableName = "locations";
-        columnName = "building";
-        columnName2 = "location";
-        columnName3 = "company";
         fileSize = 10;
-        fileManage(br, br2, br3, fileSize, tableName, x, columnName, columnName2, columnName3);   
+        tableName = "locations";
+        columnName = "building";              
+        file2 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\address.txt");
+        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));        
+        columnName2 = "location";              
+        file3 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\jobCompanies.txt");
+        br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3)));       
+        columnName3 = "company";
+        fileManage3fs(br, br2, br3, fileSize, tableName, columnName, columnName2, columnName3);  
+
+         
     }  
+
 }
-
-
-
-/*
-
-        while( (line = br.readLine())!= null){
-            if(br2 == null) {
-                break;
-            } else {
-                
-                while( (line = br2.readLine())!= null){
-                    if(br3 == null) {
-                       if(columnName == "salary"){
-                                while(i < fileSize){
-                                    BigDecimal value = (Math.random()*100);
-                                    String charname = null;
-                                    InsertData app = new InsertData();
-                                    app.insert(charname, tableName, columnName3, value);
-                                    i++;
-                                }
-                                i = 0;                           
-                       } else {
-                       break;
-                       }
-                    } 
-                    else {                    
-                            while( (line = br3.readLine())!= null){
-                                while(i < fileSize){
-                                    Integer value = null;
-                                    String [] token = line.split("\\s+");
-                                    String charname = token[i];
-                                    InsertData app = new InsertData();
-                                    app.insert(charname, tableName, columnName3, value);
-                                    i++;
-                                }
-                                i = 0;
-                            }
-                        }
-                    while(i < fileSize){
-                        Integer value = null;
-                        String [] token = line.split("\\s+");
-                        String charname = token[i];
-                        InsertData app = new InsertData();
-                        app.insert(charname, tableName, columnName2, value);
-                        i++;
-                    }
-                    i = 0;
-                }
-                                                                                
-                while(i < fileSize){
-                    Integer value = null;
-                    String [] token = line.split("\\s+");
-                    String charname = token[i];
-                    InsertData app = new InsertData();
-                    app.insert(charname, tableName, columnName, value);
-                    i++;
-                }                                
-            }           
-        }
-*/

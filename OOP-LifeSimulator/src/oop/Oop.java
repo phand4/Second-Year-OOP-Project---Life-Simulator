@@ -42,12 +42,12 @@ public class Oop {
         String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
         String sql = "CREATE TABLE IF NOT EXISTS '" + tableName + "' (\n"
                    + "id integer PRIMARY KEY, \n"
-                   + "'"+ colName + "'text NOT NULL"
-                   + (("occupations".equals(tableName))?", \n company text, \n salary integer\n" : 
+                   + "'"+ colName + "'text"
+                   + (("occupations".equals(tableName))?", \n company text, \n salary Decimal\n" : 
                      (("locations".equals(tableName))?", \n location text, \n company text\n" : 
                      (("event".equals(tableName))?", \n eventKey integer NOT NULL\n" :
                      (("eventDesc".equals(tableName))?", \n eventData text NOT NULL, \n eventEffect text NOT NULL, \n eventKey integer NOT NULL\n" : 
-                     (("people".equals(tableName))?", \n sName text NOT NULL, \n age integer NOT NULL, \n isAlive boolean NOT NULL, \n job text NOT NULL, \n alignment integer NOT NULL, \n fame integer NOT NULL, \n money BigDecimal NOT NULL\n" : "")))))                                      
+                     (("people".equals(tableName))?", \n sName text NOT NULL, \n age integer, \n isAlive boolean, \n job text, \n morality integer, \n fame integer, \n money BigDecimal\n" : "")))))                                      
                    + ");";
         
         try (Connection conn = DriverManager.getConnection(url);

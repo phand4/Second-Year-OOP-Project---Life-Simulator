@@ -81,13 +81,40 @@ public static void main(String[] args) throws SQLException{
     System.out.println(rsMetaData.getColumnName(1));
     System.out.println(rsMetaData.getColumnName(2));
     System.out.println(rsMetaData.getColumnName(3));
+    System.out.println(rsMetaData.getColumnName(4));
     while (m_ResultSet.next()){
         System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2) 
-        + ", " + m_ResultSet.getString(3));
-        
-       
+        + ", " + m_ResultSet.getString(3) + ", " + m_ResultSet.getString(4));               
     }
    
+    query = "SELECT * FROM firstNames";
+    m_ResultSet = m_Statement.executeQuery(query);
+    rsMetaData = m_ResultSet.getMetaData();    
+    System.out.println(rsMetaData.getColumnName(1));
+    System.out.println(rsMetaData.getColumnName(2));
+    while (m_ResultSet.next()){
+        System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2));               
+    }
     
+    query = "SELECT * FROM surnames";
+    m_ResultSet = m_Statement.executeQuery(query);
+    rsMetaData = m_ResultSet.getMetaData();    
+    System.out.println(rsMetaData.getColumnName(1));
+    System.out.println(rsMetaData.getColumnName(2));
+    while (m_ResultSet.next()){
+        System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2));               
+    }
+    
+    query = "SELECT * FROM occupations";
+    m_ResultSet = m_Statement.executeQuery(query);
+    rsMetaData = m_ResultSet.getMetaData();    
+    System.out.println(rsMetaData.getColumnName(1));
+    System.out.println(rsMetaData.getColumnName(2));
+    System.out.println(rsMetaData.getColumnName(3));
+    System.out.println(rsMetaData.getColumnName(4));
+    while (m_ResultSet.next()){
+        System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2)
+        + ", " + m_ResultSet.getString(3)+ ", " + m_ResultSet.getString(4));               
+    }   
 }
 }
