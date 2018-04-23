@@ -12,7 +12,7 @@ public class Person implements GameObject{
 	private BigDecimal money;
 	private int alignment;
 	private int fame;
-	private Color colour; 
+	private Color textColour;
 
 	public Person(String fn, String sn, int a, Job j, int i, int f, char g) {
 		this.fname = fn;
@@ -24,7 +24,7 @@ public class Person implements GameObject{
 		this.fame = f;
 		this.gender = g;
 		this.money = (this.job).getSalary();
-		
+		this.textColour = randomColor();
 	}
 	
 	public Person(String fn, char g, Job j)
@@ -38,7 +38,7 @@ public class Person implements GameObject{
 		this.money = null;
 		this.fame = 0; 
 		this.alignment = 0;
-		this.colour = randomColor();
+		this.textColour = randomColor();
 	}
 	
 	public Person()
@@ -52,7 +52,7 @@ public class Person implements GameObject{
 		this.alignment = 0;
 		this.fame = 0;
 		this.money = null;
-		this.colour = randomColor();
+		this.textColour = randomColor();
 	}
 	
 	private char randomGender()
@@ -78,7 +78,11 @@ public class Person implements GameObject{
 	
 	private String randomSurname()
 	{
-		return "";
+		Random sn = new Random();
+		int n = sn.nextInt(100);
+		String surname = "";
+		//surname = selectSurname("Surname", n);
+		return surname;
 	}
 	
 	
