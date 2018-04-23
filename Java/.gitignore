@@ -2,3 +2,10 @@
 /Person.class
 /Job.class
 /GameObject.class
+/Player.class
+/BufferedImageLoader.class
+/Game$STATE.class
+/Game.class
+/Menu.class
+/Event.class
+/GameText.class

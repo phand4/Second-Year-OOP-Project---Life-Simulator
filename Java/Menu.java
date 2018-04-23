@@ -1,4 +1,3 @@
-package com.game.src.main;
 
 import java.awt.Color;
 import java.awt.Font;
