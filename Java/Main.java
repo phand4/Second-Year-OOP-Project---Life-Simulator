@@ -35,6 +35,8 @@ public class Main
 		
 		people = setup.returnPeopleArray();
 		events = setup.returnEventArray();
+		Player me = new Player("Peter", 'F', null);
+		
 		/*
 		Player player = new Player("Peter", 'M', j2);
  		Person p1 = new Person("John", "Doe", 30, "President", 1, 10, 'M');

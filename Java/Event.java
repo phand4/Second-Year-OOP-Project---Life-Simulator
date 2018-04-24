@@ -63,7 +63,10 @@ public class Event {
 		}
 		else
 		{
-			//
+			if(eventOutcome.equals("fameUp"))
+			{
+				
+			}
 		}
 			
 	}
