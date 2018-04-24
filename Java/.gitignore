@@ -9,3 +9,9 @@
 /Menu.class
 /Event.class
 /GameText.class
+/InitialiseGame.class
+/CreateDatabase.class
+/InsertData.class
+/fillWorld.class
+/GenerateEvents.class
+/PullEvents.class
