@@ -5,12 +5,16 @@ public class Player extends Person{
 	{
 		super(fname, gender, j);
 	}
+	public Player(Person p)
+	{
+		super(p.getfName(), p.getsName(), p.getAge(), p.getJob(), p.getFame(), p.getGender(), p.getMoney());
+	}
 	
 	
 	@Override
 	public String fameCalculator()
 	{
-		String fameString = "";
+		String fameString = "\n";
 		if(getFame() < 20 && getFame() >= 0)
 		{
 			fameString += " You "+ (getStatus() ? "are" : "were") + " not famous.";
@@ -40,14 +44,14 @@ public class Player extends Person{
 		String toBeReturned = "";
 		if(getStatus())
 		{
-			toBeReturned = "Your name is " + getfName() + " " + getsName() + "." + " You are " + getAge() + " years old.";
+			toBeReturned = "Your name is " + getfName() + " " + getsName() + "." + " \nYou are " + getAge() + " years old.";
 			if(getJob() != null)
 			{
-				toBeReturned +=  " You work as a " + getJob() + "."; 
+				toBeReturned +=  " \nYou work as a " + getJob() + "."; 
 			}
 			else if(getJob() == null)
 			{
-				toBeReturned +=  " You are unemployed."; 
+				toBeReturned +=  " \nYou are unemployed."; 
 			}
 		}
 		else
