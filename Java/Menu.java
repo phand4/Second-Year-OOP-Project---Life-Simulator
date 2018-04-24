@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ac436abdaafae104cde77d8c242bcd6359636f0b
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import javafx.application.Application;
@@ -19,8 +22,11 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+<<<<<<< HEAD
 =======
 >>>>>>> 4be656749874f59571b2545fe7d26b9c90a5697e
+=======
+>>>>>>> ac436abdaafae104cde77d8c242bcd6359636f0b
 
 public class Menu extends Application {
 
@@ -99,6 +105,7 @@ public class Menu extends Application {
 		letter.setFill(Color.WHITE);
 
 		return letter;
+<<<<<<< HEAD
 	}
 
 
@@ -221,3 +228,126 @@ public class Menu extends Application {
 		launch(args);
 	}
 }
+=======
+	}
+
+
+
+	private MenuItem getMenuItem(int index) {
+		return (MenuItem)menuBox.getChildren().get(index);
+	}
+
+	private static class ContentFrame extends StackPane {
+		public ContentFrame(Node content) {
+			setAlignment(Pos.CENTER);
+
+			Rectangle frame = new Rectangle(1000, 200);
+			frame.setStroke(Color.WHITESMOKE);
+
+			getChildren().addAll(frame, content);
+		}
+	}
+
+	private static class MenuItem extends HBox {
+
+		private Pointers c1 = new Pointers(), c2 = new Pointers();
+		private Text text;
+		private Runnable script;
+
+		public MenuItem(String name) {
+			super(15);
+			setAlignment(Pos.CENTER);
+
+			text = new Text(name);
+			text.setFont(FONT);
+			text.setEffect(new GaussianBlur(2));
+
+			getChildren().addAll(c1, text, c2);
+			setActive(false);
+			setOnActivate(() -> {	
+				try {
+					startGame();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		}
+
+		public void startGame() throws Exception {
+			menuBox.getChildren().clear();
+			menuBox.getChildren().removeAll();
+			newGame = true;
+			root.setVisible(false);
+			game.start();
+
+		}
+
+		public void setActive(boolean b) {
+			c1.setVisible(b);
+			c2.setVisible(b);
+			text.setFill(b ? Color.WHITE : Color.GREY);
+		}
+
+		public void setOnActivate(Runnable r) {
+			script = r;
+		}
+
+		public void activate() {
+			if (script != null)
+				script.run();
+		}
+	}
+
+	private static class Pointers extends Parent {
+
+		public Pointers() {
+
+			Shape shape3 = Shape.subtract(new Circle(5), new Circle(2));
+			shape3.setFill(Color.WHITE);
+			shape3.setTranslateX(2.5);
+			shape3.setTranslateY(-5);
+
+			getChildren().addAll(shape3);
+
+			setEffect(new GaussianBlur(2));
+		}
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
+		Scene scene = new Scene(createContent());
+		scene.setOnKeyPressed(event -> {
+			if (event.getCode() == KeyCode.UP) {
+				if (currentItem > 0) {
+					getMenuItem(currentItem).setActive(false);
+					getMenuItem(--currentItem).setActive(true);
+				}
+			}
+
+			if (event.getCode() == KeyCode.DOWN) {
+				if (currentItem < menuBox.getChildren().size() - 1) {
+					getMenuItem(currentItem).setActive(false);
+					getMenuItem(++currentItem).setActive(true);
+				}
+			}
+
+			if (event.getCode() == KeyCode.ENTER) {
+
+				if(newGame == false) {
+					getMenuItem(currentItem).activate();
+				}
+			}
+		});
+
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(event -> {
+			bgThread.shutdownNow();
+		});
+		primaryStage.show();
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+}
+>>>>>>> ac436abdaafae104cde77d8c242bcd6359636f0b
