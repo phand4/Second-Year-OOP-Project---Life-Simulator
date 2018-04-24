@@ -2,11 +2,32 @@
 /Person.class
 /Job.class
 /GameObject.class
+<<<<<<< HEAD
+=======
 /Player.class
+>>>>>>> 4be656749874f59571b2545fe7d26b9c90a5697e
 /BufferedImageLoader.class
 /Game$STATE.class
 /Game.class
 /Menu.class
+<<<<<<< HEAD
+/Menu$1.class
+/Display.class
+/Menu$ImageLoader.class
+/HoverButton.class
+/Display$1.class
+/Menu$ContentFrame.class
+/Menu$MenuItem.class
+/Menu$TriCircle.class
+/MKXMenuApp$ContentFrame.class
+/MKXMenuApp$MenuItem.class
+/MKXMenuApp$TriCircle.class
+/MKXMenuApp.class
+/Menu$Pointers.class
+/Savesate.class
+/Rules.class
+/GamePanel.class
+=======
 /Event.class
 /GameText.class
 /InitialiseGame.class
@@ -15,6 +36,10 @@
 /fillWorld.class
 /GenerateEvents.class
 /PullEvents.class
+<<<<<<< HEAD
+>>>>>>> 4be656749874f59571b2545fe7d26b9c90a5697e
+=======
 /Menu$ContentFrame.class
 /Menu$MenuItem.class
 /Menu$Pointers.class
+>>>>>>> ac436abdaafae104cde77d8c242bcd6359636f0b
