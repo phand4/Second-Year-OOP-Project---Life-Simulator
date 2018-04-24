@@ -177,4 +177,8 @@ public class Person implements GameObject{
 	public int getFame(){
 		return this.fame;
 	}
+	public BigDecimal getMoney()
+	{
+		return this.money;
+	}
 }
