@@ -8,26 +8,24 @@ public class Person implements GameObject{
 	private String sname;
 	private String fname;
 	private char gender;
-	private Job job;
+	private String job;
 	private BigDecimal money;
-	private int alignment;
 	private int fame;
 	private Color textColour;
 
-	public Person(String fn, String sn, int a, Job j, int i, int f, char g) {
+	public Person(String fn, String sn, int a, String j, int f, char g, BigDecimal m) {
 		this.fname = fn;
 		this.sname = sn;
 		this.age = a;
 		this.isAlive = true;
 		this.job = j;
-		this.alignment = i;
 		this.fame = f;
 		this.gender = g;
-		this.money = (this.job).getSalary();
+		this.money = m;
 		this.textColour = randomColor();
 	}
 	
-	public Person(String fn, char g, Job j)
+	public Person(String fn, char g, String j)
 	{
 		this.fname = fn;
 		this.sname = randomSurname();
@@ -37,7 +35,6 @@ public class Person implements GameObject{
 		this.job = j;
 		this.money = null;
 		this.fame = 0; 
-		this.alignment = 0;
 		this.textColour = randomColor();
 	}
 	
@@ -48,8 +45,7 @@ public class Person implements GameObject{
 		this.age = 18;
 		this.gender = randomGender();
 		this.isAlive = true;
-		this.job = null;
-		this.alignment = 0;
+		this.job = "";
 		this.fame = 0;
 		this.money = null;
 		this.textColour = randomColor();
@@ -86,9 +82,9 @@ public class Person implements GameObject{
 	}
 	
 	
-	public BigDecimal checkFunds()
+	public String checkFunds()
 	{
-		return money;
+		return money.toString();
 	}
 	
 	public String fameCalculator()
@@ -126,22 +122,11 @@ public class Person implements GameObject{
 			if(getJob() != null)
 			{
 				toBeReturned +=  ((getGender() == 'M') ? "He" : "She") + " works as a " + getJob() + ". "; 
+				toBeReturned +=  ((getGender() == 'M') ? "He" : "She") + " has a yearly salary of €" + checkFunds() + ". ";
 			}
 			else if(getJob() == null)
 			{
 				toBeReturned += ((getGender() == 'M') ? "He" : "She") + " is unemployed. "; 
-			}
-			if(getAlignment() < 0)
-			{
-				toBeReturned += ((getGender() == 'M') ? "He" : "She") + " is a bad person. ";
-			}
-			else if (getAlignment() == 0)
-			{
-				toBeReturned += ((getGender() == 'M') ? "He" : "She") + " is neutral. ";
-			}
-			else if(getAlignment() > 0)
-			{
-				toBeReturned += ((getGender() == 'M') ? "He" : "She") + " is a good person. ";
 			}
 		}
 		else
@@ -153,19 +138,7 @@ public class Person implements GameObject{
 			}
 			else if(getJob() == null)
 			{
-				toBeReturned += ((getGender() == 'M') ? "He " : "She ") + " were unemployed. "; 
-			}
-			if(getAlignment() < 0)
-			{
-				toBeReturned += ((getGender() == 'M') ? "He " : "She ") + " were a bad person. ";
-			}
-			else if (getAlignment() == 0)
-			{
-				toBeReturned += ((getGender() == 'M') ? "He " : "She ") + " were neutral. ";
-			}
-			else if(getAlignment() > 0)
-			{
-				toBeReturned += ((getGender() == 'M') ? "He " : "She ") + " were a good person. ";
+				toBeReturned += ((getGender() == 'M') ? "He " : "She ") + " was unemployed. "; 
 			}
 		}
 		toBeReturned+= fameCalculator();
@@ -198,11 +171,7 @@ public class Person implements GameObject{
 	}
 
 	public String getJob(){
-		return (this.job).toString();
-	}
-
-	public int getAlignment(){
-		return this.alignment;
+		return this.job;
 	}
 
 	public int getFame(){

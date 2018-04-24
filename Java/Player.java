@@ -1,7 +1,7 @@
 
 public class Player extends Person{
 	
-	public Player(String fname, char gender, Job j)
+	public Player(String fname, char gender, String j)
 	{
 		super(fname, gender, j);
 	}
@@ -49,18 +49,6 @@ public class Player extends Person{
 			{
 				toBeReturned +=  " You are unemployed."; 
 			}
-			if(getAlignment() < 0)
-			{
-				toBeReturned += " You are a bad person.";
-			}
-			else if (getAlignment() == 0)
-			{
-				toBeReturned +=  " You are neutral.";
-			}
-			else if(getAlignment() > 0)
-			{
-				toBeReturned += " You are a good person.";
-			}
 		}
 		else
 		{
@@ -72,18 +60,6 @@ public class Player extends Person{
 			else if(getJob() == null)
 			{
 				toBeReturned += "You were unemployed. "; 
-			}
-			if(getAlignment() < 0)
-			{
-				toBeReturned += "You were a bad person. ";
-			}
-			else if (getAlignment() == 0)
-			{
-				toBeReturned += "You were neutral. ";
-			}
-			else if(getAlignment() > 0)
-			{
-				toBeReturned += "You were a good person. ";
 			}
 		}
 		toBeReturned+= fameCalculator();

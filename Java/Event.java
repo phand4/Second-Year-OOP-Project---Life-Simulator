@@ -1,15 +1,14 @@
 
 public class Event {
-	private int eventID;
-	private String eventTitle;
-	private int type;
-	private int minAge;
-	private int maxAge;
-	private int alignmentTrigger;
-	private boolean interactive;
-	private Person eventPerson;
-	private String event;
-	private String eventOutcome;
+	private int eventID; //ID
+	private String eventTitle; //Title of event
+	private int type; //
+	private int minAge; //Minimum age the player has to be to get this event
+	private int maxAge; //Maximum age the player can be to get this event
+	private boolean interactive; //Whether the event is interactive or not
+	private Person eventPerson; //Additional people associated with the event
+	private String event; //Text of the event
+	private String eventOutcome; //Event outcome string
 	
 	public Event()
 	{
@@ -17,24 +16,22 @@ public class Event {
 		this.eventTitle = "";
 		this.minAge = 0;
 		this.maxAge = 90;
-		this.alignmentTrigger = 0;
 		this.interactive = false;
 		this.eventPerson = null;
 		this.event = "";
 		this.eventOutcome = "";
 	}
 	
-	public Event(int id, String title, int min, int max, int trigger,boolean interactive, Person p, String event)
+	public Event(int id, String title, int min, int max, boolean interactive, String event, String outcome)
 	{
 		this.eventID = id;
 		this.eventTitle = title;
 		this.minAge = min;
 		this.maxAge = max;
-		this.alignmentTrigger = trigger;
 		this.interactive = interactive;
-		this.eventPerson = p;
+		this.eventPerson = null;
 		this.event = event;
-		this.eventOutcome = "";
+		this.eventOutcome = outcome;
 	}
 	
 	public boolean ageTrigger(Player player)
@@ -46,34 +43,16 @@ public class Event {
 		return true;
 	}
 	
-	public boolean alignmentTrigger(Player player)
-	{
-		boolean trigger = true;
-		if(this.alignmentTrigger < 0)
-		{
-			if(player.getAlignment() > this.alignmentTrigger)
-			{
-				trigger = false;
-			}
-		}
-		else if(this.alignmentTrigger >= 0)
-		{
-			if(player.getAlignment() < this.alignmentTrigger)
-			{
-				trigger = false;
-			}
-		}
-		return trigger;
-	}
-	
 	public String printEvent()
 	{
-		return this.event;
+		String printedEvent = (this.event).replaceAll("_", " ");
+		return printedEvent;
 	}
 	
 	public String printEventOutcome()
 	{
-		return this.eventOutcome;
+		String outcome = (this.eventOutcome).replaceAll("_", " ");
+		return outcome;
 	}
 	
 	public void runEvent(Player player)
