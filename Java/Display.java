@@ -13,10 +13,10 @@ public class Display {
     private String title;
     private int width, height;
 
-    public Display(String tuade, int rong, int dai) {
-        this.title = tuade;
-        this.width = dai;
-        this.height = rong;
+    public Display(String t, int h, int w) {
+        this.title = t;
+        this.width = w;
+        this.height = h;
         initCanvas();
     }
 
@@ -36,19 +36,6 @@ public class Display {
         canvas.setBackground(Color.BLACK);
         canvas.setMinimumSize(new Dimension(width, height));
         
-        JButton but = new JButton("Button");
-        
-        but.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                but.setBackground(Color.GREEN);
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                but.setBackground(UIManager.getColor("control"));
-            }
-        });
-        
-        jframe.add(but, BorderLayout.SOUTH);
         jframe.add(canvas);
         jframe.pack();
 
