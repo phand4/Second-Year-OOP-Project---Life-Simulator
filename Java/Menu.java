@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import javafx.application.Application;
@@ -18,6 +19,8 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+=======
+>>>>>>> 4be656749874f59571b2545fe7d26b9c90a5697e
 
 public class Menu extends Application {
 

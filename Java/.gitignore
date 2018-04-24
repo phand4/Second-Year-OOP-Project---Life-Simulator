@@ -2,10 +2,15 @@
 /Person.class
 /Job.class
 /GameObject.class
+<<<<<<< HEAD
+=======
+/Player.class
+>>>>>>> 4be656749874f59571b2545fe7d26b9c90a5697e
 /BufferedImageLoader.class
 /Game$STATE.class
 /Game.class
 /Menu.class
+<<<<<<< HEAD
 /Menu$1.class
 /Display.class
 /Menu$ImageLoader.class
@@ -22,3 +27,13 @@
 /Savesate.class
 /Rules.class
 /GamePanel.class
+=======
+/Event.class
+/GameText.class
+/InitialiseGame.class
+/CreateDatabase.class
+/InsertData.class
+/fillWorld.class
+/GenerateEvents.class
+/PullEvents.class
+>>>>>>> 4be656749874f59571b2545fe7d26b9c90a5697e
