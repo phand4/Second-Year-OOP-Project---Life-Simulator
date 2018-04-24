@@ -41,7 +41,6 @@ public class fillWorld {
         Integer data3 =null;
         Boolean isAlive = true;
         String job = null;
-        Integer morality= null;
         Integer fame = null;
         BigDecimal money = null;
               
@@ -83,13 +82,13 @@ public class fillWorld {
                 System.out.println(e.getMessage());
             }      
             
-            morality = r.nextInt(100);
+
             fame = r.nextInt(100);
             
             money = BigDecimal.valueOf(r.nextInt(9999999));
             
             fillWorld app = new fillWorld();       
-            app.generatePopulation(data, data2, data3, isAlive, job, morality, fame, money);
+            app.generatePopulation(data, data2, data3, isAlive, job, fame, money);
             i++;
             
         }
@@ -107,22 +106,20 @@ public class fillWorld {
     System.out.println(rsMetaData.getColumnName(6));
     System.out.println(rsMetaData.getColumnName(7));
     System.out.println(rsMetaData.getColumnName(8));
-    System.out.println(rsMetaData.getColumnName(9));
     while (m_ResultSet.next()){
         System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2) 
         + ", " + m_ResultSet.getString(3) + ", " + m_ResultSet.getString(4)  
         + ", " + m_ResultSet.getString(5) + ", " + m_ResultSet.getString(6)
-        + ", " + m_ResultSet.getString(7) + ", " + m_ResultSet.getString(8)
-        + ", " + m_ResultSet.getString(9));
+        + ", " + m_ResultSet.getString(7) + ", " + m_ResultSet.getString(8));
     }       
        
     }
     
     
     public void generatePopulation(String data, String data2, Integer data3, 
-                                          Boolean isAlive, String job, Integer morality, 
+                                          Boolean isAlive, String job,
                                           Integer Fame, BigDecimal money) throws SQLException {
-        String sql = "INSERT into people (fName, sName, age, isAlive, job, morality, fame, money) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT into people (fName, sName, age, isAlive, job, fame, money) VALUES(?, ?, ?, ?, ?, ?, ?)";
       
          try(Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)){  
@@ -132,9 +129,9 @@ public class fillWorld {
             pstmt.setInt(3, data3);
             pstmt.setBoolean(4, isAlive);
             pstmt.setString(5, job);
-            pstmt.setInt(6, morality);
-            pstmt.setInt(7, Fame);
-            pstmt.setBigDecimal(8, money);           
+
+            pstmt.setInt(6, Fame);
+            pstmt.setBigDecimal(7, money);           
             pstmt.executeUpdate();
          } catch (SQLException e) {
                 System.out.println(e.getMessage());

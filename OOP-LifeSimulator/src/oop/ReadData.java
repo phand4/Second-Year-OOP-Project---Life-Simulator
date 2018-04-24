@@ -116,5 +116,23 @@ public static void main(String[] args) throws SQLException{
         System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2)
         + ", " + m_ResultSet.getString(3)+ ", " + m_ResultSet.getString(4));               
     }   
+    
+    query = "SELECT * FROM events";
+    m_ResultSet = m_Statement.executeQuery(query);
+    rsMetaData = m_ResultSet.getMetaData();    
+    System.out.println(rsMetaData.getColumnName(1));
+    System.out.println(rsMetaData.getColumnName(2));
+    System.out.println(rsMetaData.getColumnName(3));
+    System.out.println(rsMetaData.getColumnName(4));
+    System.out.println(rsMetaData.getColumnName(5));
+    System.out.println(rsMetaData.getColumnName(6));
+    System.out.println(rsMetaData.getColumnName(7));
+  
+    while (m_ResultSet.next()){
+        System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2)
+        + ", " + m_ResultSet.getString(3)+ ", " + m_ResultSet.getString(4)
+        + ", " + m_ResultSet.getString(5)+ ", " + m_ResultSet.getString(6)  
+        + ", " + m_ResultSet.getString(7)+ ", " + m_ResultSet.getString(8));        
+    }
 }
 }

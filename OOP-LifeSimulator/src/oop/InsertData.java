@@ -106,6 +106,109 @@ public class InsertData {
 
     }
     
+    public static void fileManage7fs18(BufferedReader br, BufferedReader br2, BufferedReader br3,
+                                       String columnName, String columnName2, String columnName3, 
+                                       Integer fileSize) throws IOException{
+                   String line, line2, line3 = null;
+                   String tableName = "events";
+                   String eventTitle = null;             
+                   int minAge = 0;
+                   int maxAge = 18;
+                   Boolean interactive = false;
+                   String event = null;
+                   String eventOutcome = null;
+                   int i = 0;
+        while( (line = br.readLine())!= null && (line2 = br2.readLine()) !=  null && (line3 = br3.readLine()) != null){                               
+            while(i < fileSize){
+                    Integer value = null;
+                    String [] token = line.split("\\s+");
+                    String charname = token[i];
+                    String [] token2 = line2.split("\\s+");
+                    String charname2 = token2[i];
+                    String [] token3 = line3.split("\\s+");
+                    String charname3 = token3[i];
+                    InsertData app = new InsertData();
+                    app.insert7fs(tableName, charname, minAge, maxAge, interactive, charname2, charname3);                   
+                    i++;
+                }
+                i = 0;
+        }                    
+    }
+    
+    public static void fileManage7fs18p(BufferedReader br, BufferedReader br2, BufferedReader br3,
+                                       String columnName, String columnName2, String columnName3, 
+                                       Integer fileSize) throws IOException{
+                   String line, line2, line3 = null;
+                   String tableName = "events";
+                   String eventTitle = null;             
+                   int minAge = 18;
+                   int maxAge = 100;
+                   Boolean interactive = false;
+                   String event = null;
+                   String eventOutcome = null;
+                   int i = 0;
+        while( (line = br.readLine())!= null && (line2 = br2.readLine()) !=  null && (line3 = br3.readLine()) != null){                               
+            while(i < fileSize){
+                    Integer value = null;
+                    String [] token = line.split("\\s+");
+                    String charname = token[i];
+                    String [] token2 = line2.split("\\s+");
+                    String charname2 = token2[i];
+                    String [] token3 = line3.split("\\s+");
+                    String charname3 = token3[i];
+                    InsertData app = new InsertData();
+                    app.insert7fs(tableName, charname, minAge, maxAge, interactive, charname2, charname3);                   
+                    i++;
+                }
+                i = 0;
+        }         
+    }
+    
+    public static void fileManage7fs(BufferedReader br, BufferedReader br2, BufferedReader br3,
+                                       String columnName, String columnName2, String columnName3, 
+                                       Integer fileSize) throws IOException{
+                   String line, line2, line3 = null;
+                   String tableName = "events";
+                   String eventTitle = null;             
+                   int minAge = 1;
+                   int maxAge = 100;
+                   Boolean interactive = false;
+                   String event = null;
+                   String eventOutcome = null;
+                   int i = 0;
+        while( (line = br.readLine())!= null && (line2 = br2.readLine()) !=  null && (line3 = br3.readLine()) != null){                               
+            while(i < fileSize){
+                    Integer value = null;
+                    String [] token = line.split("\\s+");
+                    String charname = token[i];
+                    String [] token2 = line2.split("\\s+");
+                    String charname2 = token2[i];
+                    String [] token3 = line3.split("\\s+");
+                    String charname3 = token3[i];
+                    InsertData app = new InsertData();
+                    app.insert7fs(tableName, charname, minAge, maxAge, interactive, charname2, charname3);                   
+                    i++;
+                }
+                i = 0;
+        }        
+    }
+    
+    public void insert7fs(String tableName, String charname, int minAge,int maxAge,Boolean interactive,String charname2,String charname3){
+        String sql = "INSERT INTO '" + tableName + "'( eventTitle , minAge , maxAge , interactive , event , eventOutcome ) VALUES (?, ?, ?, ?, ?, ?)";
+    
+        try(Connection conn = this.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, charname);
+            pstmt.setInt(2, minAge);
+            pstmt.setInt(3, maxAge);
+            pstmt.setBoolean(4, interactive);
+            pstmt.setString(5, charname2);
+            pstmt.setString(6, charname3);
+            
+        } catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }}
     
     public static void main(String[] args) throws IOException{
         // TODO code application logic here
@@ -164,7 +267,45 @@ public class InsertData {
         columnName3 = "company";
         fileManage3fs(br, br2, br3, fileSize, tableName, columnName, columnName2, columnName3);  
 
-         
+         //filling event table for under 18s
+        file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\eventTitleu18.txt");
+        br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        fileSize = 7;
+        columnName = "eventTitle";
+        file2 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\eventu18.txt");
+        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));
+        columnName2 = "event";
+        file3 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\eventOCu18.txt");
+        br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3))); 
+        columnName3 = "eventOutcome" ;
+        fileManage7fs18(br, br2, br3, columnName, columnName2, columnName3, fileSize);
+    
+         //filling event table for plus 18s
+        file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\eventTitlep18.txt");
+        br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        fileSize = 7;
+        columnName = "eventTitle";
+        file2 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\eventp18.txt");
+        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));
+        columnName2 = "event";
+        file3 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\eventOCp18.txt");
+        br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3))); 
+        columnName3 = "eventOutcome" ;
+        fileManage7fs18p(br, br2, br3, columnName, columnName2, columnName3, fileSize);    
+    
+   
+        //filling event table
+        file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\eventTitle.txt");
+        br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        fileSize = 7;
+        columnName = "eventTitle";
+        file2 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\events.txt");
+        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));
+        columnName2 = "event";
+        file3 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\eventOC.txt");
+        br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3))); 
+        columnName3 = "eventOutcome" ;
+        fileManage7fs(br, br2, br3, columnName, columnName2, columnName3, fileSize); 
     }  
 
 }

@@ -23,7 +23,7 @@ public class Oop {
      * @param args the command line arguments
      */
     
-    public static void createNewDatabase(String fileName) {
+    public static void createNewDatabase(String fileName){
         String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
         
         try (Connection conn = DriverManager.getConnection(url)) {
@@ -47,7 +47,7 @@ public class Oop {
                      (("locations".equals(tableName))?", \n location text, \n company text\n" : 
                      (("event".equals(tableName))?", \n eventKey integer NOT NULL\n" :
                      (("eventDesc".equals(tableName))?", \n eventData text NOT NULL, \n eventEffect text NOT NULL, \n eventKey integer NOT NULL\n" : 
-                     (("people".equals(tableName))?", \n sName text NOT NULL, \n age integer, \n isAlive boolean, \n job text, \n morality integer, \n fame integer, \n money BigDecimal\n" : "")))))                                      
+                     (("people".equals(tableName))?", \n sName text NOT NULL, \n age integer, \n isAlive boolean, \n job text, \n fame integer, \n money BigDecimal\n" : "")))))                                      
                    + ");";
         
         try (Connection conn = DriverManager.getConnection(url);
@@ -66,8 +66,6 @@ public class Oop {
         createNewTable("people.db", "surnames", "name");
         createNewTable("people.db", "occupations", "jobTitle");
         createNewTable("people.db", "locations", "building");
-        createNewTable("people.db", "event", "title");
-        createNewTable("people.db", "evenDesc", "eventTitle");
         createNewTable("people.db", "people", "fName");
         
         
