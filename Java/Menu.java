@@ -20,171 +20,201 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Menu extends Application {
+
+
+	private static final Font FONT = Font.loadFont("file:res/arcadeclassic/ARCADECLASSIC.TTF", 36);
+	private static final Font TITLE = Font.loadFont("file:res/arcadeclassic/ARCADECLASSIC.TTF", 76);
+
+	public static GamePanel game = new GamePanel(); 
+
+	public static VBox menuBox;
+
+	public static Stage stage = new Stage();
+
+	public static Pane root;
+
+	public static boolean newGame = false;
 	
 
-    private static final Font FONT = Font.loadFont("file:res/arcadeclassic/ARCADECLASSIC.TTF", 36);
-    private static final Font TITLE = Font.loadFont("file:res/arcadeclassic/ARCADECLASSIC.TTF", 76);
+	private int currentItem = 0;
 
-    public static Game game = new Game(); 
+	private int messages = 0;
 
-    private VBox menuBox;
-    private int currentItem = 0;
+	private ScheduledExecutorService bgThread = Executors.newSingleThreadScheduledExecutor();
 
-    private int messages = 0;
+	public Parent createContent() throws InterruptedException {
 
-    private ScheduledExecutorService bgThread = Executors.newSingleThreadScheduledExecutor();
+		root = new Pane();
+		root.setPrefSize(900, 600);
+		Rectangle bg = new Rectangle(900, 600);
 
-    private Parent createContent() {
-    	
-    	
-    	
-        Pane root = new Pane();
-        root.setPrefSize(900, 600);
+		ContentFrame frame2 = new ContentFrame(createMiddleContent());
 
-        Rectangle bg = new Rectangle(900, 600);
-        
-        ContentFrame frame2 = new ContentFrame(createMiddleContent());
+		HBox hbox = new HBox(15, frame2);
+		hbox.setTranslateX(-60);
+		hbox.setTranslateY(55);
 
-        HBox hbox = new HBox(15, frame2);
-        hbox.setTranslateX(-60);
-        hbox.setTranslateY(55);
+		MenuItem itemExit = new MenuItem("Exit");
+		itemExit.setOnActivate(() -> System.exit(0));
 
-        MenuItem itemExit = new MenuItem("Exit");
-        itemExit.setOnActivate(() -> System.exit(0));
+		menuBox = new VBox(10,
+				new MenuItem("New Game"),
+				new MenuItem("Rules"),
+				itemExit);
+		menuBox.setAlignment(Pos.TOP_CENTER);
+		menuBox.setTranslateX(360);
+		menuBox.setTranslateY(300);
 
-        menuBox = new VBox(10,
-                new MenuItem("New Game"),
-                new MenuItem("Rules"),
-                itemExit);
-        menuBox.setAlignment(Pos.TOP_CENTER);
-        menuBox.setTranslateX(360);
-        menuBox.setTranslateY(300);
+		getMenuItem(0).setActive(true);
 
-   
+		root.getChildren().addAll(bg, hbox, menuBox);
 
-        getMenuItem(0).setActive(true);
+		return root;
+	}
 
-        root.getChildren().addAll(bg, hbox, menuBox);
-        return root;
-    }
 
-    
 
-    private Node createMiddleContent() {
-    	
-    	   String title = "Game  of   Life";
-           HBox letters = new HBox(0);
-           letters.setAlignment(Pos.CENTER);
-           for (int i = 0; i < title.length(); i++) {
-               Text letter = new Text(title.charAt(i) + "");
-               letter.setFont(TITLE);
-               letter.setFill(Color.WHITE);
-               letters.getChildren().add(letter);
-           }
+	private Node createMiddleContent() throws InterruptedException {
 
-           return letters;
-    }
+		String title = "Game  of   Life";
+		HBox letters = new HBox(0);
+		letters.setAlignment(Pos.CENTER);
+		for (int i = 0; i < title.length(); i++) {
 
-    
+			Text letter = printLetter(title.charAt(i));
+			letters.getChildren().add(letter);
 
-    private MenuItem getMenuItem(int index) {
-        return (MenuItem)menuBox.getChildren().get(index);
-    }
+		}
+		return letters;
 
-    private static class ContentFrame extends StackPane {
-        public ContentFrame(Node content) {
-            setAlignment(Pos.CENTER);
-            
-            Rectangle frame = new Rectangle(1000, 200);
-            frame.setArcWidth(25);
-            frame.setArcHeight(25);
-            frame.setStroke(Color.WHITESMOKE);
+	}
 
-            getChildren().addAll(frame, content);
-        }
-    }
+	private Text printLetter(char x) throws InterruptedException {
 
-    private static class MenuItem extends HBox {
-        private Pointers c1 = new Pointers(), c2 = new Pointers();
-        private Text text;
-        private Runnable script;
+		Text letter = new Text(x + "");
+		letter.setFont(TITLE);
+		letter.setFill(Color.WHITE);
 
-        public MenuItem(String name) {
-            super(15);
-            setAlignment(Pos.CENTER);
+		return letter;
+	}
 
-            text = new Text(name);
-            text.setFont(FONT);
-            text.setEffect(new GaussianBlur(2));
 
-            getChildren().addAll(c1, text, c2);
-            setActive(false);
-            setOnActivate(() -> game.start());
-        }
 
-        public void setActive(boolean b) {
-            c1.setVisible(b);
-            c2.setVisible(b);
-            text.setFill(b ? Color.WHITE : Color.GREY);
-        }
+	private MenuItem getMenuItem(int index) {
+		return (MenuItem)menuBox.getChildren().get(index);
+	}
 
-        public void setOnActivate(Runnable r) {
-            script = r;
-        }
+	private static class ContentFrame extends StackPane {
+		public ContentFrame(Node content) {
+			setAlignment(Pos.CENTER);
 
-        public void activate() {
-            if (script != null)
-                script.run();
-        }
-    }
+			Rectangle frame = new Rectangle(1000, 200);
+			frame.setStroke(Color.WHITESMOKE);
 
-    private static class Pointers extends Parent {
-    	
-        public Pointers() {
-        	
-            Shape shape3 = Shape.subtract(new Circle(5), new Circle(2));
-            shape3.setFill(Color.WHITE);
-            shape3.setTranslateX(2.5);
-            shape3.setTranslateY(-5);
+			getChildren().addAll(frame, content);
+		}
+	}
 
-            getChildren().addAll(shape3);
+	private static class MenuItem extends HBox {
 
-            setEffect(new GaussianBlur(2));
-        }
-    }
+		private Pointers c1 = new Pointers(), c2 = new Pointers();
+		private Text text;
+		private Runnable script;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    	
-        Scene scene = new Scene(createContent());
-        scene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.UP) {
-                if (currentItem > 0) {
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(--currentItem).setActive(true);
-                }
-            }
+		public MenuItem(String name) {
+			super(15);
+			setAlignment(Pos.CENTER);
 
-            if (event.getCode() == KeyCode.DOWN) {
-                if (currentItem < menuBox.getChildren().size() - 1) {
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(++currentItem).setActive(true);
-                }
-            }
+			text = new Text(name);
+			text.setFont(FONT);
+			text.setEffect(new GaussianBlur(2));
 
-            if (event.getCode() == KeyCode.ENTER) {
-                getMenuItem(currentItem).activate();
-            }
-        });
+			getChildren().addAll(c1, text, c2);
+			setActive(false);
+			setOnActivate(() -> {	
+				try {
+					startGame();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		}
 
-        primaryStage.setScene(scene);
-        primaryStage.setOnCloseRequest(event -> {
-            bgThread.shutdownNow();
-        });
-        primaryStage.show();
-    }
+		public void startGame() throws Exception {
+			menuBox.getChildren().clear();
+			menuBox.getChildren().removeAll();
+			newGame = true;
+			root.setVisible(false);
+			game.start();
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+		}
+
+		public void setActive(boolean b) {
+			c1.setVisible(b);
+			c2.setVisible(b);
+			text.setFill(b ? Color.WHITE : Color.GREY);
+		}
+
+		public void setOnActivate(Runnable r) {
+			script = r;
+		}
+
+		public void activate() {
+			if (script != null)
+				script.run();
+		}
+	}
+
+	private static class Pointers extends Parent {
+
+		public Pointers() {
+
+			Shape shape3 = Shape.subtract(new Circle(5), new Circle(2));
+			shape3.setFill(Color.WHITE);
+			shape3.setTranslateX(2.5);
+			shape3.setTranslateY(-5);
+
+			getChildren().addAll(shape3);
+
+			setEffect(new GaussianBlur(2));
+		}
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
+		Scene scene = new Scene(createContent());
+		scene.setOnKeyPressed(event -> {
+			if (event.getCode() == KeyCode.UP) {
+				if (currentItem > 0) {
+					getMenuItem(currentItem).setActive(false);
+					getMenuItem(--currentItem).setActive(true);
+				}
+			}
+
+			if (event.getCode() == KeyCode.DOWN) {
+				if (currentItem < menuBox.getChildren().size() - 1) {
+					getMenuItem(currentItem).setActive(false);
+					getMenuItem(++currentItem).setActive(true);
+				}
+			}
+
+			if (event.getCode() == KeyCode.ENTER) {
+
+				if(newGame == false) {
+					getMenuItem(currentItem).activate();
+				}
+			}
+		});
+
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(event -> {
+			bgThread.shutdownNow();
+		});
+		primaryStage.show();
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
