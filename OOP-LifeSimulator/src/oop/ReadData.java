@@ -30,15 +30,15 @@ public class ReadData {
 }
 public void selectAll(String tableName){
     String sql = "SELECT * FROM'" + tableName + "'";
-     try(Connection conn = this.connect();
-         Statement stmt = conn.createStatement();
-         ResultSet rs = stmt.executeQuery(sql)){
-         while(rs.next()) {
-             //System.out.println(rs.getString(tableName));
+         try(Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
+             while(rs.next()) {
+                 //System.out.println(rs.getString(tableName));
+             }
+         } catch(SQLException e){
+             System.out.println(e.getMessage());
          }
-     } catch(SQLException e){
-         System.out.println(e.getMessage());
-     }
     /* try(Connection conn = this.connect();
      Statement stmt = conn.createStatement();
      ResultSet rs = stmt.executeQuery("Select * From'" + tableName + "'")){

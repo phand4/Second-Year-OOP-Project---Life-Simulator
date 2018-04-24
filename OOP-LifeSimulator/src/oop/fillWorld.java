@@ -20,26 +20,22 @@ import java.util.Random;
  * @author Peter
  */
 public class fillWorld {
-    private static Connection conn = null;
+
     
-    private static void connect() throws SQLException {
+    private Connection connect() throws SQLException {
         // SQLite connection string
         String url = "jdbc:sqlite:C://sqlite/db/people.db";
-        
+        Connection conn = null;        
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-                
-       
+        return conn;                    
     }
      
-    public static void createPopulation() throws SQLException {
-       
-    
-        Statement fW_Statement = conn.createStatement();
-        
+    public void createPopulation() throws SQLException {
+
         String data = null;
         String data2 = null;
         Integer data3 =null;
@@ -50,39 +46,57 @@ public class fillWorld {
         BigDecimal money = null;
               
         int i = 0;
-        while(i < 10){
+        while(i < 40){
+
             Random r = new Random();
             int x = r.nextInt(100);
             String query = "SELECT name FROM firstNames WHERE id = '" + x + "'";
-            ResultSet fW_ResultSet = fW_Statement.executeQuery(query);
-           
-
-            data = fW_ResultSet.getString(1);
-            
-            x = r.nextInt(100);
+            try(Connection conn = this.connect();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query)){
+                data = rs.getString(1);
+            } catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+            x = r.nextInt(100);           
             query = "SELECT name FROM surnames WHERE id = '" + x + "'";
-            fW_ResultSet = fW_Statement.executeQuery(query);
-            data2 = fW_ResultSet.getString(1);
+            try(Connection conn = this.connect();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query)){
+                data2 = rs.getString(1);
+            } catch(SQLException e){
+                System.out.println(e.getMessage());
+            }           
+
+            x = r.nextInt(100);
+            data3 = x;
             
-            data3 = 10;
+            isAlive= true;
             
-            isAlive= true; 
+            x = r.nextInt(10);           
+            query = "SELECT jobTitle FROM occupations WHERE id = '" + x + "'";
+            try(Connection conn = this.connect();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query)){
+                job = rs.getString(1);
+            } catch(SQLException e){
+                System.out.println(e.getMessage());
+            }      
             
-            job = "doctor";
+            morality = r.nextInt(100);
+            fame = r.nextInt(100);
             
-            morality = 5;
-            
-            fame = 10;
-            money = BigDecimal.valueOf(99900);
+            money = BigDecimal.valueOf(r.nextInt(9999999));
             
             fillWorld app = new fillWorld();       
             app.generatePopulation(data, data2, data3, isAlive, job, morality, fame, money);
             i++;
             
         }
-    Statement m_Statement = conn.createStatement();
+    Connection m_Connection = DriverManager.getConnection("jdbc:sqlite:C://sqlite/db/people.db");    
+    Statement m_Statement = m_Connection.createStatement();
     String query = "SELECT * FROM people";
-    ResultSet m_ResultSet = fW_Statement.executeQuery(query);
+    ResultSet m_ResultSet = m_Statement.executeQuery(query);
     ResultSetMetaData rsMetaData = m_ResultSet.getMetaData();
     
     System.out.println(rsMetaData.getColumnName(1));
@@ -98,7 +112,8 @@ public class fillWorld {
         System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2) 
         + ", " + m_ResultSet.getString(3) + ", " + m_ResultSet.getString(4)  
         + ", " + m_ResultSet.getString(5) + ", " + m_ResultSet.getString(6)
-        + ", " + m_ResultSet.getString(7) + ", " + m_ResultSet.getString(8));
+        + ", " + m_ResultSet.getString(7) + ", " + m_ResultSet.getString(8)
+        + ", " + m_ResultSet.getString(9));
     }       
        
     }
@@ -109,8 +124,9 @@ public class fillWorld {
                                           Integer Fame, BigDecimal money) throws SQLException {
         String sql = "INSERT into people (fName, sName, age, isAlive, job, morality, fame, money) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
       
-        
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+         try(Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){  
+
             pstmt.setString(1, data);
             pstmt.setString(2, data2);
             pstmt.setInt(3, data3);
@@ -120,18 +136,19 @@ public class fillWorld {
             pstmt.setInt(7, Fame);
             pstmt.setBigDecimal(8, money);           
             pstmt.executeUpdate();
-      
+         } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }  
         
     }
 
     
     public static void main(String args[]) throws SQLException {
-        connect();
-        createPopulation();
+        fillWorld app = new fillWorld();
+        app.createPopulation();
         
         
-    Statement m_Statement = conn.createStatement();
-    String query = "SELECT * FROM people";
+
    // "occupation" locations
 
         
