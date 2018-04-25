@@ -144,6 +144,55 @@ public class Person implements GameObject{
 		toBeReturned+= fameCalculator();
 		return toBeReturned;
 	}
+	
+	public void increaseFame()
+	{
+		this.fame += 10;
+	}
+	
+	public void decreaseFame()
+	{
+		this.fame -= 10;
+	}
+	
+	public void loseJob()
+	{
+		this.job = null;
+	}
+	
+	public void ageIncrease()
+	{
+		this.age += 1;
+	}
+	
+	public void isWizard()
+	{
+		this.job = "Wizard";
+	}
+	
+	public void isSherriff()
+	{
+		this.job = "Sherriff";
+	}
+	
+	public void died() 
+	{
+		this.isAlive = false;
+	}
+	
+	public void moneyUp()
+	{
+		Random r = new Random();
+		double i = r.nextDouble();
+		this.money.add(BigDecimal.valueOf(i));
+	}
+	
+	public void moneyDown()
+	{
+		Random r = new Random();
+		double i = r.nextDouble();
+		this.money.subtract(BigDecimal.valueOf(i));
+	}
 
 	public String getfName()
 	{
