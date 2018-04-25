@@ -63,9 +63,41 @@ public class Event {
 		}
 		else
 		{
-			if(eventOutcome.equals("fameUp"))
+			if(eventOutcome.equalsIgnoreCase("fameUp"))
 			{
-				
+				player.increaseFame();
+			}
+			else if(eventOutcome.equalsIgnoreCase("fameDown"))
+			{
+				player.decreaseFame();
+			}
+			else if(eventOutcome.equalsIgnoreCase("jobLost"))
+			{
+				player.loseJob();
+			}
+			else if(eventOutcome.equalsIgnoreCase("ageup"))
+			{
+				player.ageIncrease();
+			}
+			else if(eventOutcome.equalsIgnoreCase("wizard"))
+			{
+				player.isWizard();
+			}
+			else if(eventOutcome.equalsIgnoreCase("isAlive"))
+			{
+				player.died();
+			}
+			else if(eventOutcome.equalsIgnoreCase("sheriff"))
+			{
+				player.isSherriff();
+			}
+			else if(eventOutcome.equalsIgnoreCase("moneyUp"))
+			{
+				player.moneyUp();
+			}
+			else if(eventOutcome.equalsIgnoreCase("moneyDown"))
+			{
+				player.moneyDown();
 			}
 		}
 			
