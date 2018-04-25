@@ -147,7 +147,7 @@ public class InsertData {
             pstmt.setBoolean(4, interactive);
             pstmt.setString(5, charname2);
             pstmt.setString(6, charname3);
-            
+            pstmt.executeUpdate();
         } catch (SQLException e)
         {
             System.out.println(e.getMessage());

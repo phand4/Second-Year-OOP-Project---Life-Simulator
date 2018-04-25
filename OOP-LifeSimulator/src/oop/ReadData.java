@@ -69,6 +69,9 @@ public static void main(String[] args) throws SQLException{
 
     tableName = "occupations";
     app.selectAll(tableName);     
+    
+    tableName = "events";
+    app.selectAll(tableName);
 
     Connection m_Connection = DriverManager.getConnection("jdbc:sqlite:C://sqlite/db/people.db");
     
