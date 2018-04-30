@@ -10,12 +10,14 @@ package oop;
  * @author Peter
  */
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import static oop.generateEvents.createNewTable;
 
 public class Oop {
 
@@ -59,7 +61,7 @@ public class Oop {
        
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, SQLException {
         // TODO code application logic here
         createNewDatabase("people.db");
         createNewTable("people.db", "firstNames", "name");
@@ -67,6 +69,13 @@ public class Oop {
         createNewTable("people.db", "occupations", "jobTitle");
         createNewTable("people.db", "locations", "building");
         createNewTable("people.db", "people", "fName");
+
+        generateEvents.main(null); 
+        InsertData.main(null);
+        fillWorld.main(null);
+
+
+        
         
         
     }  
