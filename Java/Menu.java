@@ -1,3 +1,5 @@
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import javafx.application.Application;
@@ -18,6 +20,8 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sun.audio.*;
+
 
 public class Menu extends Application {
 
@@ -113,6 +117,30 @@ public class Menu extends Application {
 
 			getChildren().addAll(frame, content);
 		}
+	}
+
+	public static void music(){
+		
+		AudioPlayer MGP = AudioPlayer.player;
+		AudioStream BGM;
+		AudioData MD;
+		ContinuousAudioDataStream loop = null;
+		
+		try {
+			
+			FileInputStream fileStream = new FileInputStream("res/main_menu.wav");
+			BGM = new AudioStream(fileStream);
+			MD = BGM.getData();
+			loop = new ContinuousAudioDataStream(MD);
+			
+	
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	
+		MGP.start(loop);
+		
 	}
 
 	private static class MenuItem extends HBox {
@@ -215,6 +243,8 @@ public class Menu extends Application {
 	}
 
 	public static void main(String[] args) {
+		music();
 		launch(args);
+		
 	}
 }

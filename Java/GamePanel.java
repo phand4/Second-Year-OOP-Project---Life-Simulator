@@ -23,6 +23,9 @@ public class GamePanel {
 		frame.add(panel);
 		frame.setVisible(true);
 		
+		
+		
+		
 	}
 
 }
