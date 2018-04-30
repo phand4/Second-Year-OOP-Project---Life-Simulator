@@ -44,6 +44,14 @@ public class Event {
 	public String printEvent()
 	{
 		String printedEvent = (this.event).replaceAll("_", " ");
+		String toBePrinted = "";
+		if(printedEvent.length() > 60)
+		{
+			int mid = printedEvent.length() / 2;
+			String[] printedEvent1 = {printedEvent.substring(0, mid), printedEvent.substring(mid)};
+			toBePrinted = printedEvent1[0] + "\n" + printedEvent1[1];
+			return "\n>" + toBePrinted + "\n";
+		}
 		return "\n>" + printedEvent + "\n";
 	}
 	
