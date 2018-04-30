@@ -1,1 +1,1 @@
-null fameup null null null null isalive
+null fameup null null null null isalive ageup

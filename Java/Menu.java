@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import javafx.application.Application;
@@ -11,6 +14,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -18,6 +23,8 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sun.audio.*;
+
 
 public class Menu extends Application {
 
@@ -115,6 +122,15 @@ public class Menu extends Application {
 		}
 	}
 
+	public static void music(){
+		
+		String bip = "res/game_music.mp3";
+		Media hit = new Media(new File(bip).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(hit);
+		mediaPlayer.play();
+		
+	}
+
 	private static class MenuItem extends HBox {
 
 		private Pointers c1 = new Pointers(), c2 = new Pointers();
@@ -201,9 +217,11 @@ public class Menu extends Application {
 
 			if (event.getCode() == KeyCode.ENTER) {
 
+				
 				if(newGame == false) {
 					getMenuItem(currentItem).activate();
 				}
+				primaryStage.close();
 			}
 		});
 
@@ -215,6 +233,8 @@ public class Menu extends Application {
 	}
 
 	public static void main(String[] args) {
+		music();
 		launch(args);
+		
 	}
 }

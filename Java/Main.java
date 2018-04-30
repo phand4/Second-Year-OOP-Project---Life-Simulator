@@ -33,13 +33,11 @@ public class Main
 		ArrayList<Person> people = new ArrayList<Person>();
 		ArrayList<Event> events = new ArrayList<Event>();
 		
-		people = setup.returnPeopleArray();
-		events = setup.returnEventArray();
 	}
 	
 	public static void main(String[] args) throws SQLException, IOException{
 		
-		Player me = new Player("Peter", 'F', null);
+		Player me = new Player("Mark", 'M', null);
 		
 		/*
 		Player player = new Player("Peter", 'M', j2);
