@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="Java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Daniel/Downloads/sqlite-jdbc-3.21.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dell XPS 13/Documents/DT 228-2/Sem 2/Software 2/Assignment/sqlite-jdbc-3.21.0.jar"/>
 	<classpathentry kind="output" path="Java"/>
 </classpath>

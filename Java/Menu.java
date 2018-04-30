@@ -92,7 +92,7 @@ public class Menu extends Application {
 			letters.getChildren().add(letter);
 
 		}
-		return letters;
+		return letters; 
 
 	}
 
@@ -124,7 +124,11 @@ public class Menu extends Application {
 
 	public static void music(){
 		
+<<<<<<< HEAD
+		String bip = "res/main_menu.mp3";
+=======
 		String bip = "res/game_music.mp3";
+>>>>>>> a8fd084812cb2293d91889a8f7c5cdb766307e99
 		Media hit = new Media(new File(bip).toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(hit);
 		mediaPlayer.play();

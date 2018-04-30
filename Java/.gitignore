@@ -43,6 +43,9 @@
 /Menu$MenuItem.class
 /Menu$Pointers.class
 >>>>>>> ac436abdaafae104cde77d8c242bcd6359636f0b
+<<<<<<< HEAD
+/SoundManager.class
+=======
 /TypeWriter.class
 /TypeWriter$1.class
 /TypeWriter$2.class
@@ -60,3 +63,4 @@
 /RequestPerson.class
 /RequestDatabase.class
 /EnterKeyListener.class
+>>>>>>> a8fd084812cb2293d91889a8f7c5cdb766307e99
