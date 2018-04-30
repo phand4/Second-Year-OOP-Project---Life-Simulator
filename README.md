@@ -17,18 +17,24 @@ Team Members:
 
 Description
 -----------
-A game written in java that is using a database to procedurally 
-generate random people and random events and to simulate life through them. 
+Life Simulator for OOP Project - Second Year DIT
+
+This project is text based, randomly generated, life simulation game.
+
+The thought process of this was to populate a database of names, occupations, places, and events and to give the user a random person to live out their life interacting with other randomly generated people from the same database.
+
 Uses java programming language with jdbc, sqlite and javafx.
 
 Team Contribution
 -----------------
 Daniel O'Connor :
+Worked on game logic and was the middle man who combined the ui and the database allowing them to communicate with each other. As well as this he 
 
 Kevin Campbell :
+In charge of UI and graphical interface for the user to iteract with. Created the main menu with music and the simulated console of the randomly generated information to be displayed.
 
 Peter Hand:
-Hande
+Handled the implementing of the sqlite databases and tables and filled them with data to randomly create a table of people, and events.
 
 Video
 ------
