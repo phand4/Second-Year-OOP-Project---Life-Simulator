@@ -1,1 +1,1 @@
-null ageup fameup famedown fameup null null
+null ageup fameup famedown fameup null null fameup ageup

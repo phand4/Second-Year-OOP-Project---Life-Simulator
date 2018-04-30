@@ -34,24 +34,7 @@ public class jointEvent {
         }
         return conn;                    
     }
-
-    public static void createNewTable(String fileName, String tableName){
-        String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
-        String sql = "CREATE TABLE IF NOT EXISTS '" + tableName + "' (\n"
-                   + "id integer PRIMARY KEY, \n"
-                   + "npcEventTitle text, \n"
-                   + "npcEvent VARCHAR(300), \n"
-                   + "npcEventOutcome text\n"
-                   + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement()) {
-                stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }      
-    }
-    
+   
     public static void fileManage(BufferedReader br, BufferedReader br2, BufferedReader br3,
                                   String columnName, String columnName2, String columnName3, Integer fileSize 
                                   ) throws IOException{
@@ -79,7 +62,7 @@ public class jointEvent {
 
     public void insert(String data, String data2, String data3, String columnName, String columnName2, String columnName3){
         
-        String sql = "INSERT INTO npcEvents ('"+ columnName + "','" + columnName2 + "','" + columnName3 +"') VALUES(?, ?, ?)";
+        String sql = "INSERT INTO Events ('"+ columnName + "','" + columnName2 + "','" + columnName3 +"') VALUES(?, ?, ?)";
         
             try(Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)){             

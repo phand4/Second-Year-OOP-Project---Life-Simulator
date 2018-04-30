@@ -1,1 +1,1 @@
-joblost fameup wizard fameup ageup isalive isalive famedown fameup
+joblost fameup wizard fameup ageup isalive isalive famedown fameup moneyup moneydown
