@@ -92,7 +92,7 @@ public class Person implements GameObject{
 		String fameString = "";
 		if(getFame() < 20 && getFame() > 0)
 		{
-			fameString += ((getGender() == 'M') ? "He " : "She ") + (getStatus() ? "is" : "was") + " not famous.";
+			fameString += ((getGender() == 'M') ? ">He " : ">She ") + (getStatus() ? "is" : "was") + " not famous.";
 		}
 		if(getFame() > 20 && getFame() < 50)
 		{
@@ -220,7 +220,8 @@ public class Person implements GameObject{
 	}
 
 	public String getJob(){
-		return this.job;
+		String jobs = this.job.replaceAll("_", " ");
+		return jobs;
 	}
 
 	public int getFame(){

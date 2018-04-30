@@ -31,6 +31,7 @@ public class InsertData {
 		jobTable();
 		locationTable();
 		eventTable();
+		npcEventsTable();
 	}
     
     private Connection connect() {
@@ -57,6 +58,47 @@ public class InsertData {
             }
         }
     }
+    
+    public void fileManage(BufferedReader br, BufferedReader br2, BufferedReader br3,
+            String columnName, String columnName2, String columnName3, Integer fileSize 
+            ) throws IOException
+    {
+    	int i =0;
+    	String line = null;
+    	String line2 = null;
+    	String line3 = null;
+    	while( (line = br.readLine())!= null && (line2 = br2.readLine()) !=  null && (line3 = br3.readLine()) != null)
+    	{                               
+    		while(i < fileSize){
+    			Integer value = null;
+    			String [] token = line.split("\\s+");
+    			String charname = token[i];
+    			String [] token2 = line2.split("\\s+");
+    			String charname2 = token2[i];
+    			String [] token3 = line3.split("\\s+");
+    			String charname3 = token3[i];
+    			insertNPC(charname, charname2, charname3, columnName, columnName2, columnName3);                   
+    			i++;
+    		}
+    		i = 0;
+    	}
+    }
+    
+    public void insertNPC(String data, String data2, String data3, String columnName, String columnName2, String columnName3)
+    {
+        String sql = "INSERT INTO npcEvents ('"+ columnName + "','" + columnName2 + "','" + columnName3 +"') VALUES(?, ?, ?)"; 
+        try(Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql))
+        {             
+            pstmt.setString(1, data);
+            pstmt.setString(2, data2);
+            pstmt.setString(3, data3);
+            pstmt.executeUpdate();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }   
+    } 
     
     public void insert(String data, String tableName, String columnName){
         String sql = "INSERT INTO '" + tableName + "'('" + columnName + "') VALUES(?)";
@@ -250,57 +292,22 @@ public class InsertData {
         fileManage7fs(br, br2, br3, columnName, columnName2, columnName3, fileSize, minAge, maxAge); 
     }
     
-    public static void main(String[] args) throws IOException{
-        
-        //Filling the firstname table
-       /* File file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\firstnames.txt");
+    public void npcEventsTable() throws IOException
+    {
+    	File file = new File("data\\eventTitle.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        String tableName = "firstNames";
-        String columnName = "name";
-        Integer fileSize = 100;
-        fileManage1f(br,fileSize, tableName, columnName);   
-        
-        //Filling the surname table
-        file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\surnames.txt");
-        br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        tableName = "surnames";
-        fileSize = 100;
-        fileManage1f(br, fileSize, tableName, columnName);   
-        
-        //filling the job table
-        file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\jobs.txt");
-        br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        File file2 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\jobCompanies.txt");
-        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));
-        tableName = "occupations";
-        File file3 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\salaries.txt");
-        br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3)));
-       
-        columnName = "jobTitle";
-        columnName2 = "company";
-        columnName3 = "salary";
-        fileSize = 10;
-        fileManage3fs(br, br2, br3, fileSize, tableName, columnName, columnName2, columnName3);   
-
-       
-        
-       /* first names, events and surnames 2 fields
-        occupations and locations are 3 fields 
-
-        
-        //filling location table
-        file = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\places.txt");
-        br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        fileSize = 10;
-        tableName = "locations";
-        columnName = "building";              
-        file2 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\address.txt");
-        br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));        
-        columnName2 = "location";              
-        file3 = new File("C:\\Users\\Peter\\Documents\\Year 2\\Object Oriented Programming\\Project\\OOP-LifeSimulator\\data\\jobCompanies.txt");
-        br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3)));       
-        columnName3 = "company";
-        fileManage3fs(br, br2, br3, fileSize, tableName, columnName, columnName2, columnName3); */ 
-
+        int fileSize = 7;
+        String columnName = "npcEventTitle";
+        File file2 = new File("data\\events.txt");
+        BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));
+        String columnName2 = "npcEvent";
+        File file3 = new File("data\\eventOC.txt");
+        BufferedReader br3 = new BufferedReader(new InputStreamReader(new FileInputStream(file3))); 
+        String columnName3 = "npcEventOutcome" ;
+        fileManage(br, br2, br3, columnName, columnName2, columnName3, fileSize); 
+    }
+    
+    public static void main(String[] args) throws IOException{
+      
     }
 } 

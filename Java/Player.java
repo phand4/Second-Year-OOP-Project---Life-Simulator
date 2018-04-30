@@ -17,25 +17,25 @@ public class Player extends Person{
 		String fameString = "\n";
 		if(getFame() < 20 && getFame() >= 0)
 		{
-			fameString += " You "+ (getStatus() ? "are" : "were") + " not famous.";
+			fameString += ">You "+ (getStatus() ? "are" : "were") + " not famous.";
 		}
 		if(getFame() > 20 && getFame() < 50)
 		{
-			fameString += " You " + (getStatus() ? "are" : "were") + " sorta famous.";
+			fameString += ">You " + (getStatus() ? "are" : "were") + " sorta famous.";
 		}
 		else if(getFame() > 50 && getFame() < 100)
 		{
-			fameString += " You " + (getStatus() ? "are" : "were") + " quite famous.";
+			fameString += ">You " + (getStatus() ? "are" : "were") + " quite famous.";
 		}
 		else if(getFame() >= 100)
 		{
-			fameString += " You " + (getStatus() ? "are" : "were") + " pretty goddamn famous.";
+			fameString += ">You " + (getStatus() ? "are" : "were") + " pretty goddamn famous.";
 		}
 		else if(getFame() < 0)
 		{
-			fameString += " You " + (getStatus() ? "are" : "were") + " infamous.";
+			fameString += ">You " + (getStatus() ? "are" : "were") + " infamous.";
 		}
-		return fameString;
+		return fameString + "\n";
 	}
 	
 	@Override
@@ -44,26 +44,26 @@ public class Player extends Person{
 		String toBeReturned = "";
 		if(getStatus())
 		{
-			toBeReturned = "Your name is " + getfName() + " " + getsName() + "." + " \nYou are " + getAge() + " years old.";
+			toBeReturned = ">Your name is " + getfName() + " " + getsName() + "." + " \n>You are " + getAge() + " years old.";
 			if(getJob() != null)
 			{
-				toBeReturned +=  " \nYou work as a " + getJob() + "."; 
+				toBeReturned +=  "\n>You work as a " + getJob() + "."; 
 			}
 			else if(getJob() == null)
 			{
-				toBeReturned +=  " \nYou are unemployed."; 
+				toBeReturned +=  "\n>You are unemployed."; 
 			}
 		}
 		else
 		{
-			toBeReturned = "Your name was " + getfName() + " " + getsName() + ". You were " + getAge() + " years old when you died. ";
+			toBeReturned = ">Your name was " + getfName() + " " + getsName() + ". \n>You were " + getAge() + " years old when you died. ";
 			if(getJob() != null)
 			{
-				toBeReturned +=  "You worked as a(an) " + getJob() + ". "; 
+				toBeReturned +=  ">You worked as a(an) " + getJob() + ". "; 
 			}
 			else if(getJob() == null)
 			{
-				toBeReturned += "You were unemployed. "; 
+				toBeReturned += ">You were unemployed. "; 
 			}
 		}
 		toBeReturned+= fameCalculator();
