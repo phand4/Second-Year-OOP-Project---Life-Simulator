@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -13,6 +14,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -121,25 +124,10 @@ public class Menu extends Application {
 
 	public static void music(){
 		
-		AudioPlayer MGP = AudioPlayer.player;
-		AudioStream BGM;
-		AudioData MD;
-		ContinuousAudioDataStream loop = null;
-		
-		try {
-			
-			FileInputStream fileStream = new FileInputStream("res/main_menu.wav");
-			BGM = new AudioStream(fileStream);
-			MD = BGM.getData();
-			loop = new ContinuousAudioDataStream(MD);
-			
-	
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-	
-		MGP.start(loop);
+		String bip = "res/main_menu.mp3";
+		Media hit = new Media(new File(bip).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(hit);
+		mediaPlayer.play();
 		
 	}
 
