@@ -65,7 +65,7 @@ public class GamePanel implements ActionListener, KeyListener{
 		frame.toFront();
 		frame.setVisible(true);
 		frame.setLocation(450, 100);
-		frame.setSize(1100, 800);
+		frame.setSize(1000, 700);
 		frame.setFont(font);
 		frame.addKeyListener(new EnterKeyListener());
 		/*FlowLayout layout = new FlowLayout();
