@@ -92,7 +92,7 @@ public class Menu extends Application {
 			letters.getChildren().add(letter);
 
 		}
-		return letters;
+		return letters; 
 
 	}
 
