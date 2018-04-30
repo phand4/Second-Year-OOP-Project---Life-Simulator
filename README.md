@@ -38,7 +38,7 @@ Handled the implementing of the sqlite databases and tables and filled them with
 
 Video
 ------
-
+[![life Simulator](https://img.youtube.com/vi/6EsPLDrCmL8/0.jpg)]
   <embed src="https://www.youtube.com/watch?v=6EsPLDrCmL8"
          type="application/x-shockwave-flash"
          wmode="transparent" width="425" height="350" />
