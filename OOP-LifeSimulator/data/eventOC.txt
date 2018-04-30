@@ -1,1 +1,1 @@
-null fameup null null null null isalive ageup
+moneydown fameup null null null null isalive ageup famedown moneyup moneydown
