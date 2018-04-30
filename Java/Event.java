@@ -6,7 +6,6 @@ public class Event {
 	private int minAge; //Minimum age the player has to be to get this event
 	private int maxAge; //Maximum age the player can be to get this event
 	private boolean interactive; //Whether the event is interactive or not
-	private Person eventPerson; //Additional people associated with the event
 	private String event; //Text of the event
 	private String eventOutcome; //Event outcome string
 	
@@ -17,7 +16,6 @@ public class Event {
 		this.minAge = 0;
 		this.maxAge = 90;
 		this.interactive = false;
-		this.eventPerson = null;
 		this.event = "";
 		this.eventOutcome = "";
 	}
@@ -29,10 +27,10 @@ public class Event {
 		this.minAge = min;
 		this.maxAge = max;
 		this.interactive = interactive;
-		this.eventPerson = null;
 		this.event = event;
 		this.eventOutcome = outcome;
 	}
+	
 	
 	public boolean ageTrigger(Player player)
 	{
@@ -46,7 +44,15 @@ public class Event {
 	public String printEvent()
 	{
 		String printedEvent = (this.event).replaceAll("_", " ");
-		return printedEvent;
+		String toBePrinted = "";
+		if(printedEvent.length() > 60)
+		{
+			int mid = printedEvent.length() / 2;
+			String[] printedEvent1 = {printedEvent.substring(0, mid), printedEvent.substring(mid)};
+			toBePrinted = printedEvent1[0] + "\n" + printedEvent1[1];
+			return "\n>" + toBePrinted + "\n";
+		}
+		return "\n>" + printedEvent + "\n";
 	}
 	
 	public String printEventOutcome()
@@ -57,17 +63,60 @@ public class Event {
 	
 	public void runEvent(Player player)
 	{
+		this.printEvent();
 		if(interactive)
 		{
 			//Player interaction goes here
 		}
 		else
 		{
-			if(eventOutcome.equals("fameUp"))
+			if(eventOutcome.equalsIgnoreCase("fameUp"))
 			{
-				
+				player.increaseFame();
+			}
+			else if(eventOutcome.equalsIgnoreCase("fameDown"))
+			{
+				player.decreaseFame();
+			}
+			else if(eventOutcome.equalsIgnoreCase("jobLost"))
+			{
+				player.loseJob();
+			}
+			else if(eventOutcome.equalsIgnoreCase("ageup"))
+			{
+				player.ageIncrease();
+			}
+			else if(eventOutcome.equalsIgnoreCase("wizard"))
+			{
+				player.isWizard();
+			}
+			else if(eventOutcome.equalsIgnoreCase("isAlive"))
+			{
+				player.died();
+			}
+			else if(eventOutcome.equalsIgnoreCase("sheriff"))
+			{
+				player.isSherriff();
+			}
+			else if(eventOutcome.equalsIgnoreCase("moneyUp"))
+			{
+				player.moneyUp();
+			}
+			else if(eventOutcome.equalsIgnoreCase("moneyDown"))
+			{
+				player.moneyDown();
 			}
 		}
 			
+	}
+	
+	public int getMinAge()
+	{
+		return this.minAge;
+	}
+	
+	public int getMaxAge()
+	{
+		return this.maxAge;
 	}
 }

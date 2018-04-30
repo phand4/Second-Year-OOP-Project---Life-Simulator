@@ -26,16 +26,18 @@ public class Main
 		}
 	}
 	
-	public static void main(String[] args) throws SQLException, IOException{
+	public static void toPanel() throws SQLException, IOException{
 		deleteDB();
 		InitialiseGame setup = new InitialiseGame();
 		setup.fillWorld();
 		ArrayList<Person> people = new ArrayList<Person>();
 		ArrayList<Event> events = new ArrayList<Event>();
 		
-		people = setup.returnPeopleArray();
-		events = setup.returnEventArray();
-		Player me = new Player("Peter", 'F', null);
+	}
+	
+	public static void main(String[] args) throws SQLException, IOException{
+		
+		Player me = new Player("Mark", 'M', null);
 		
 		/*
 		Player player = new Player("Peter", 'M', j2);
@@ -54,7 +56,7 @@ public class Main
 		//System.out.println(p1.toString());
 		//System.out.println(player.toString());
 		
-		for(int i = 0; i < 10; i++)
+		/*for(int i = 0; i < 10; i++)
 		{
 			System.out.println((people.get(i)).toString());
 		}
@@ -63,6 +65,6 @@ public class Main
 		for(int i = 0; i < 5; i++)
 		{
 			System.out.println((events.get(i)).printEvent());
-		}
+		}*/
 	}
 }

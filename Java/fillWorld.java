@@ -31,7 +31,7 @@ public class fillWorld {
         return conn;                    
     }
      
-    public ArrayList<Person> createPopulation() throws SQLException {
+    public void createPopulation() throws SQLException {
 
         String data = null;
         String data2 = null;
@@ -40,11 +40,8 @@ public class fillWorld {
         String job = null;
         Integer fame = null;
         BigDecimal money = null;
-        ArrayList<Person> people = new ArrayList<Person>();
-        char[] g = new char[40];
         int i = 0;
         while(i < 40){
-
             Random r = new Random();
             int x = r.nextInt(100);
             String query = "SELECT name FROM firstNames WHERE id = '" + x + "'";
@@ -55,13 +52,14 @@ public class fillWorld {
             } catch(SQLException e){
                 System.out.println(e.getMessage());
             }
+            String g;
             if(x > 50)
             {
-            	g[i] = 'F';
+            	g = "F";
             }
             else
             {
-            	g[i] = 'M';
+            	g = "M";
             }
             x = r.nextInt(100);           
             query = "SELECT name FROM surnames WHERE id = '" + x + "'";
@@ -100,52 +98,33 @@ public class fillWorld {
             }      
             
             fillWorld app = new fillWorld();       
-            app.generatePopulation(data, data2, data3, isAlive, job, fame, money);
+            app.generatePopulation(data, data2, data3, g, isAlive, job, fame, money);
             i++;
             
         }
-	    Connection m_Connection = DriverManager.getConnection("jdbc:sqlite:C://sqlite/db/game.db");    
-	    Statement m_Statement = m_Connection.createStatement();
-	    String query = "SELECT * FROM people";
-	    ResultSet m_ResultSet = m_Statement.executeQuery(query);
-	    ResultSetMetaData rsMetaData = m_ResultSet.getMetaData();
-	    int k = 0;
-	    while (m_ResultSet.next() )
-	    {	
-	    	String fname = m_ResultSet.getString(2);
-	    	String sname = m_ResultSet.getString(3);
-	    	int age = m_ResultSet.getInt(4);
-	    	String jobs = m_ResultSet.getString(6);
-	    	int famous = m_ResultSet.getInt(7);
-	    	BigDecimal moneyBD = m_ResultSet.getBigDecimal(8);
-	    	Person p = new Person(fname, sname, age, jobs, famous, g[k], moneyBD);
-	    	people.add(p);
-	    	k++;
-	    }       
-       return people;
     }
     
-    
-    public void generatePopulation(String data, String data2, Integer data3, 
+    public void generatePopulation(String data, String data2, Integer data3, String g,
                                           Boolean isAlive, String job, Integer Fame, BigDecimal money) throws SQLException 
     {
-        String sql = "INSERT into people (fName, sName, age, isAlive, job, fame, money) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT into people (fName, sName, age, gender, isAlive, job, fame, money) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
       
-         try(Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){  
-
-            pstmt.setString(1, data);
+        try(Connection conn = this.connect();PreparedStatement pstmt = conn.prepareStatement(sql))
+        {  
+        	pstmt.setString(1, data);
             pstmt.setString(2, data2);
             pstmt.setInt(3, data3);
-            pstmt.setBoolean(4, isAlive);
-            pstmt.setString(5, job);
-            pstmt.setInt(6, Fame);
-            pstmt.setBigDecimal(7, money);           
+            pstmt.setString(4, g);
+            pstmt.setBoolean(5, isAlive);
+            pstmt.setString(6, job);
+            pstmt.setInt(7, Fame);
+            pstmt.setBigDecimal(8, money);           
             pstmt.executeUpdate();
-         } catch (SQLException e) {
-                System.out.println(e.getMessage());
+        } 
+        catch (SQLException e) 
+        {
+        	System.out.println(e.getMessage());
         }  
-        
     }
 
     

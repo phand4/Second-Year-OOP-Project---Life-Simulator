@@ -15,9 +15,7 @@ public class InitialiseGame {
 	
 	public void initialiseConnection()
 	{
-		System.out.println("I'm fucked here");
 		CreateDatabase db = new CreateDatabase();
-		
 	}
 	
 	public void insertData() throws IOException
@@ -28,21 +26,8 @@ public class InitialiseGame {
 	public void fillWorld() throws SQLException
 	{
 		fillWorld world = new fillWorld();
-		people = world.createPopulation();
-		PullEvents dbevents = new PullEvents();
-		events = dbevents.createArrayList();
+		world.createPopulation();
 	}
-	
-	public ArrayList<Person> returnPeopleArray()
-	{
-		return people;
-	}
-	
-	public ArrayList<Event> returnEventArray()
-	{
-		return events;
-	}
-	
 	public static void main(String[] args)
 	{
 		
