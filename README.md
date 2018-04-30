@@ -27,7 +27,7 @@ Uses java programming language with jdbc, sqlite and javafx.
 Team Contribution
 -----------------
 Daniel O'Connor :
-Worked on game logic and was the middle man who combined the ui and the database allowing them to communicate with each other. As well as this he 
+Worked on game logic and was the middle man who combined the ui and the database allowing them to communicate with each other. As well as this he assisted with the combining of the other aspects of the game.
 
 Kevin Campbell :
 In charge of UI and graphical interface for the user to iteract with. Created the main menu with music and the simulated console of the randomly generated information to be displayed.
