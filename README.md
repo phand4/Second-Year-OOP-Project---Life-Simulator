@@ -3,6 +3,7 @@ Life Simulator for OOP Project - Second Year DIT
 
 Team Name :
 -----------
+Team LS
 
 Project Name: 
 ------------
@@ -27,7 +28,7 @@ Daniel O'Connor :
 Kevin Campbell :
 
 Peter Hand:
-Coded the database creation, and filled them with data. 
+Hande
 
 Video
 ------
