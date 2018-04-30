@@ -35,4 +35,6 @@ Video
 Other Sources
 -------------
 Menu Theme:
+Love Of My Life by BoxCat Games is licensed under a Creative Commons Attribution License. 
+Game Theme:
 Passing Time by BoxCat Games is licensed under a Creative Commons Attribution License.
