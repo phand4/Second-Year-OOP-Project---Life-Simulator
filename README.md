@@ -38,7 +38,7 @@ Handled the implementing of the sqlite databases and tables and filled them with
 
 Video
 ------
-https://youtu.be/6EsPLDrCmL8
+[embeded]https://youtu.be/6EsPLDrCmL8[/embeded]
 
 Other Sources
 -------------
