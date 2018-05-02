@@ -22,7 +22,7 @@ This project is text based, randomly generated, life simulation game.
 
 The thought process of this was to populate a database of names, occupations, places, and events and to give the user a random person to live out their life interacting with other randomly generated people from the same database.
 
-Uses java programming language with jdbc, sqlite and javafx.
+Uses java programming language with jdbc, sqlite and javafx. Main program is in the java folder and uses the data folder.
 
 Team Contribution
 -----------------
